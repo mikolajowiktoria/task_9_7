@@ -44,6 +44,7 @@ setGameElements();
 var playerPointsElem = document.getElementById('js-playerPoints'),
     playerNameElem = document.getElementById('js-playerName'),
     computerPointsElem = document.getElementById('js-computerPoints');
+
 function newGame() {
   player.name = prompt('Please enter your name', 'imię gracza');
   if (player.name) {
@@ -52,7 +53,7 @@ function newGame() {
     setGameElements();
 
     playerNameElem.innerHTML = player.name;
-    // setGamePoints(); // This function has not been created yet
+    setGamePoints(); 
   }
 
 }
@@ -94,13 +95,16 @@ function checkRoundWinner(playerPick, computerPick) {
     if (winnerIs == 'player') {
         playerResultElem.innerHTML = "Win!";
         player.score++;
+        setGamePoints();
+        endGame();        
     } else if (winnerIs == 'computer') {
         computerResultElem.innerHTML = "Win!";
         computer.score++;
+        setGamePoints(); 
+        endGame();    
     }
 
 }
-
 function playerPick(playerPick) {
     var computerPick = getComputerPick();
 
@@ -116,11 +120,18 @@ function setGamePoints() {
 }
 
 
-
-
-
-
-
+function endGame() {
+    if (player.score == 10) {
+        gameState = 'ended';
+        alert(player.name + ' is a winner!');
+        setGameElements();
+    }
+    else if (computer.score ==10) {
+        gameState = 'ended';
+        alert('computer is a winner!');
+        setGameElements();
+    }
+}
 
 
 
